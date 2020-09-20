@@ -17,7 +17,7 @@ check_system() {
         echo -e "${OK} ${GreenBG} 当前系统为 $ID"
 		sudo pacman -Syu
         INS="pacman -S"
-		yes | sudo $INS base-devel
+		sudo $INS --noconfirm base-devel
     else
         echo -e "${Error} ${RedBG} 当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内，安装中断 ${Font}"
         exit 1
@@ -31,10 +31,10 @@ function install_dwm() {
 	if ! [ -f st.diff ]; then
 		wget https://github.com/sandylaw/dwm/blob/master/st.diff	
 	fi
-	if !f [ -f bg.jpg ]; then
+	if ! [ -f bg.jpg ]; then
 		wget https://github.com/sandylaw/dwm/blob/master/bg.jpg
 	fi
-    yes | sudo $INS -y recordmydesktop git firefox feh compton xautolock scrot
+    yes | sudo $INS recordmydesktop git firefox feh compton xautolock scrot
     TUSER="$USER"
     git clone https://git.suckless.org/st
     cp st.diff st/
@@ -44,6 +44,7 @@ function install_dwm() {
     git clone https://git.suckless.org/dwm/
     cp dwm.diff dwm/
     cd dwm
+	sed -ri "s/_USERNAME/$TUSER/g" dwm.diff
     patch -p1 < dwm.diff
     cd ..
     git clone https://git.suckless.org/dmenu/
@@ -55,6 +56,7 @@ function install_dwm() {
     pushd sent/ > /dev/null || exit
     wget -O - https://dl.suckless.org/tools/sent-1.tar.gz | tar -xz
     popd > /dev/null || exit
+	mkdir -p /home/"$TUSER"/screenshots > /dev/null
     tree -d .
     DWM=(st dmenu dwm slstatus farbfeld sent slock)
     for x in ${DWM[*]}; do

@@ -1,6 +1,6 @@
-diff -up old-dwm/config.def.h dwm/config.def.h
---- old-dwm/config.def.h	2020-09-20 01:12:37.805310871 +0800
-+++ dwm/config.def.h	2020-09-20 01:25:13.335286244 +0800
+diff -up dwm/config.def.h newdwm/config.def.h
+--- dwm/config.def.h	2020-09-20 15:22:17.882465375 +0800
++++ newdwm/config.def.h	2020-09-20 15:20:29.809135568 +0800
 @@ -3,6 +3,10 @@
  /* appearance */
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -22,31 +22,27 @@ diff -up old-dwm/config.def.h dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -57,12 +62,21 @@ static const Layout layouts[] = {
- /* commands */
+@@ -58,11 +63,18 @@ static const Layout layouts[] = {
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
  static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
--static const char *termcmd[]  = { "st", NULL };
-+static const char *termcmd[]  = { "st", NULL };
+ static const char *termcmd[]  = { "st", NULL };
 +static const char *browsercmd[]  = { "firefox", NULL };
 +static const char *filecmd[]  = { "thunar", NULL };
 +static const char *recordcmd[]  = { "recordmydesktop", NULL };
-+static const char *cmdprintscreen[]  = { "scrot", "~/Pictures/screenshots/%Y-%m-%d-%s_$wx$h.jpg", NULL };
-+static const char *scrotfocusedcmd[]  = { "scrot", "--focused", "~/Pictures/screenshots/%Y-%m-%d-%s_$wx$h.jpg", NULL };
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
 -	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-+	{ 0,                            PrintScreenDWM, spawn,     {.v = cmdprintscreen } },
-+	{ ShiftMask,                    XK_Print,  spawn,          {.v = scrotfocusedcmd } },
-+	{ ControlMask,                  XK_Print,  spawn,          SHCMD("sleep 1s;scrot --select") },
++	{ 0,                            PrintScreenDWM, spawn,     SHCMD("scrot %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/sandy/Pictures/screenshots/'") },
++	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("scrot --focused %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/sandy/Pictures/screenshots/'") },
++	{ ControlMask,                  XK_Print,  spawn,          SHCMD("sleep 1s;scrot --select %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/sandy/Pictures/screenshots/'") },
  	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 +	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filecmd } },
 +	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
  	{ MODKEY,                       XK_b,      togglebar,      {0} },
  	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
  	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-@@ -76,8 +90,6 @@ static Key keys[] = {
+@@ -76,8 +88,6 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -55,7 +51,7 @@ diff -up old-dwm/config.def.h dwm/config.def.h
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
  	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
  	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-@@ -94,6 +106,10 @@ static Key keys[] = {
+@@ -94,6 +104,10 @@ static Key keys[] = {
  	TAGKEYS(                        XK_8,                      7)
  	TAGKEYS(                        XK_9,                      8)
  	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
@@ -66,9 +62,12 @@ diff -up old-dwm/config.def.h dwm/config.def.h
  };
  
  /* button definitions */
-diff -up old-dwm/dwm.c dwm/dwm.c
---- old-dwm/dwm.c	2020-09-20 01:12:37.805310871 +0800
-+++ dwm/dwm.c	2020-09-20 01:13:55.415308346 +0800
+Only in newdwm: config.h
+Only in newdwm: drw.o
+Only in newdwm: dwm
+diff -up dwm/dwm.c newdwm/dwm.c
+--- dwm/dwm.c	2020-09-20 15:22:17.882465375 +0800
++++ newdwm/dwm.c	2020-09-20 15:16:26.412476835 +0800
 @@ -57,12 +57,30 @@
  #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
  #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
@@ -777,5 +776,7 @@ diff -up old-dwm/dwm.c dwm/dwm.c
  void
  zoom(const Arg *arg)
  {
-Only in dwm: dwm-systray-20200914-61bb8b2.diff
-Common subdirectories: old-dwm/.git and dwm/.git
+Only in newdwm: dwm.diff
+Only in newdwm: dwm.o
+Common subdirectories: dwm/.git and newdwm/.git
+Only in newdwm: util.o
