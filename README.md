@@ -8,7 +8,7 @@
 
 ## Install
 
-`wget https://github.com/sandylaw/dwm/blob/master/install.sh && bash install.sh` 
+`wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/sandylaw/dwm/master/install.sh" && chmod +x install.sh && bash install.sh` 
 
 ## Default Setting
 
