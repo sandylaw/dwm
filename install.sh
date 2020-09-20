@@ -13,9 +13,9 @@ check_system() {
 		sudo apt update
         INS="apt install"
 		sudo $INS libx11-dev libxrandr-dev libxft-dev libxinerama-dev libjpeg-dev -y
-    elif [[ "${ID}" == "archlinux"  ]] || [[ "${ID}" == "manjaro"  ]]; then
+    elif [[ "${ID}" == "archlinux"  ]] || [[ "${ID}" == "manjaro"  ]] || [[ "${ID}" == "endeavouros"  ]]; then
         echo -e "${OK} ${GreenBG} 当前系统为 $ID"
-		sudo pacman -Syu
+		sudo pacman -Sy
         INS="pacman -S"
 		sudo $INS --noconfirm base-devel
     else
@@ -26,15 +26,15 @@ check_system() {
 
 function install_dwm() {
 	if ! [ -f dwm.diff ]; then
-		wget https://github.com/sandylaw/dwm/blob/master/dwm.diff
+		wget -N --no-check-certificate -q -O dwm.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/dwm.diff"
 	fi
 	if ! [ -f st.diff ]; then
-		wget https://github.com/sandylaw/dwm/blob/master/st.diff	
+		wget -N --no-check-certificate -q -O st.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/st.diff"
 	fi
 	if ! [ -f bg.jpg ]; then
-		wget https://github.com/sandylaw/dwm/blob/master/bg.jpg
+		wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
 	fi
-    yes | sudo $INS recordmydesktop git firefox feh compton xautolock scrot
+    yes | sudo $INS --noconfirm recordmydesktop git firefox feh compton xautolock scrot
     TUSER="$USER"
     git clone https://git.suckless.org/st
     cp st.diff st/
