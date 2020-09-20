@@ -25,8 +25,16 @@ check_system() {
 }
 
 function install_dwm() {
-	
-    yes | sudo $INS -y recordmydesktop git feh compton xautolock scrot
+	if ! [ -f dwm.diff ]; then
+		wget https://github.com/sandylaw/dwm/blob/master/dwm.diff
+	fi
+	if ! [ -f st.diff ]; then
+		wget https://github.com/sandylaw/dwm/blob/master/st.diff	
+	fi
+	if !f [ -f bg.jpg ]; then
+		wget https://github.com/sandylaw/dwm/blob/master/bg.jpg
+	fi
+    yes | sudo $INS -y recordmydesktop git firefox feh compton xautolock scrot
     TUSER="$USER"
     git clone https://git.suckless.org/st
     cp st.diff st/
