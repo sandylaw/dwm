@@ -34,7 +34,7 @@ function install_dwm() {
 	if ! [ -f bg.jpg ]; then
 		wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
 	fi
-    yes | sudo $INS recordmydesktop git firefox firefox-esr feh compton xautolock scrot pcmanfm
+    yes | sudo $INS recordmydesktop xfce4-volumed git firefox firefox-esr feh compton xautolock scrot pcmanfm
     TUSER="$USER"
 	git clone https://github.com/juliusHuelsmann/st.git
 	cd st||exit
@@ -88,8 +88,8 @@ xset s off
 slstatus &
 setxkbmap -option grp:switch us,dk
 #synclient TapButton2=
-#xfce4-volumed
-#nm-applet &
+xfce4-volumed
+nm-applet &
 #dwmstatusda > ~/dwmstatusda.txt &
 xautolock -time 10 -locker slock &
 #mailchecker &
