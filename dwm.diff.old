@@ -1,6 +1,6 @@
 diff -up dwm/config.def.h newdwm/config.def.h
---- dwm/config.def.h	2020-09-21 23:51:56.780437968 +0800
-+++ newdwm/config.def.h	2020-09-21 23:48:19.449674008 +0800
+--- dwm/config.def.h	2020-09-20 15:22:17.882465375 +0800
++++ newdwm/config.def.h	2020-09-20 15:20:29.809135568 +0800
 @@ -3,6 +3,10 @@
  /* appearance */
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -22,7 +22,7 @@ diff -up dwm/config.def.h newdwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -58,11 +63,21 @@ static const Layout layouts[] = {
+@@ -58,11 +63,18 @@ static const Layout layouts[] = {
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
  static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
  static const char *termcmd[]  = { "st", NULL };
@@ -39,13 +39,10 @@ diff -up dwm/config.def.h newdwm/config.def.h
  	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 +	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filecmd } },
 +	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
-+	{ Mod1Mask,                     XK_F8,     spawn,          SHCMD("amixer set Master toggle") },
-+	{ Mod1Mask,                     XK_F9,     spawn,          SHCMD("amixer set Master 10%-") },
-+	{ Mod1Mask,                     XK_F10,    spawn,          SHCMD("amixer set Master 10%+") },
  	{ MODKEY,                       XK_b,      togglebar,      {0} },
  	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
  	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-@@ -76,8 +91,6 @@ static Key keys[] = {
+@@ -76,8 +88,6 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -54,7 +51,7 @@ diff -up dwm/config.def.h newdwm/config.def.h
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
  	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
  	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-@@ -94,6 +107,10 @@ static Key keys[] = {
+@@ -94,6 +104,10 @@ static Key keys[] = {
  	TAGKEYS(                        XK_8,                      7)
  	TAGKEYS(                        XK_9,                      8)
  	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
@@ -65,9 +62,12 @@ diff -up dwm/config.def.h newdwm/config.def.h
  };
  
  /* button definitions */
+Only in newdwm: config.h
+Only in newdwm: drw.o
+Only in newdwm: dwm
 diff -up dwm/dwm.c newdwm/dwm.c
---- dwm/dwm.c	2020-09-21 23:51:56.780437968 +0800
-+++ newdwm/dwm.c	2020-09-21 23:48:19.449674008 +0800
+--- dwm/dwm.c	2020-09-20 15:22:17.882465375 +0800
++++ newdwm/dwm.c	2020-09-20 15:16:26.412476835 +0800
 @@ -57,12 +57,30 @@
  #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
  #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
@@ -776,4 +776,7 @@ diff -up dwm/dwm.c newdwm/dwm.c
  void
  zoom(const Arg *arg)
  {
+Only in newdwm: dwm.diff
+Only in newdwm: dwm.o
 Common subdirectories: dwm/.git and newdwm/.git
+Only in newdwm: util.o
