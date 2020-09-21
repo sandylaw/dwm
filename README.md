@@ -30,10 +30,16 @@
 - Select PrintScreen:  Ctrl +Printscreen
 - Killclient: Win+Shift+c
 
+- raise volume by each 10 % : Alt+F10
+- reduce volume by each 10 %: Alt+F9
+- mute/unmute audio :         Alt+F8
+
 ## st
 
-- Scrollup: Shift+Pageup or Mouse scroll
-- Scrolldown: shift+Pagedown or Mouse scroll
+- Alt+c into vim mode
+- Esc or i return normal mode
+- Paste: shift+insert
+- Copy: Ctrl+Shift+c
 
 ## Layouts
 
