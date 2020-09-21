@@ -36,10 +36,13 @@ function install_dwm() {
 	fi
     yes | sudo $INS recordmydesktop git firefox firefox-esr feh compton xautolock scrot pcmanfm
     TUSER="$USER"
-    git clone https://git.suckless.org/st
-    cp st.diff st/
-    cd st
-    patch -p1 < st.diff
+	git clone https://github.com/juliusHuelsmann/st.git
+	cd st||exit
+	git checkout master
+	cp ../st.diff .
+	patch -p1 < st.diff
+	# Optional: Use my xresources 
+	xrdb -merge .Xresources
     cd ..
     git clone https://git.suckless.org/dwm/
     cp dwm.diff dwm/
@@ -61,6 +64,7 @@ function install_dwm() {
     DWM=(st dmenu dwm slstatus farbfeld sent slock)
     for x in ${DWM[*]}; do
         pushd "$x" > /dev/null || exit
+		rm config.h
         sudo make clean install
         popd > /dev/null || exit
     done
