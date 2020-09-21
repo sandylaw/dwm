@@ -34,7 +34,7 @@ function install_dwm() {
 	if ! [ -f bg.jpg ]; then
 		wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
 	fi
-    yes | sudo $INS recordmydesktop git firefox feh compton xautolock scrot
+    yes | sudo $INS recordmydesktop git firefox firefox-esr feh compton xautolock scrot pcmanfm
     TUSER="$USER"
     git clone https://git.suckless.org/st
     cp st.diff st/

@@ -17,7 +17,7 @@
 - Alt+Tab as switch between open applications (default Alt-j)
 - Alt+F4 as kill current application (default Alt-Shift-c)
 - Default browser: firefox ; Win+w
-- Default filemanager: thunar ; Win+Shift+f
+- Default filemanager: pcmanfm ; Win+Shift+f
 - Default terminal: st ; Win+Shift+Enter
 - Resart dwm: Win+Shift+q; will not logout.
 
