@@ -16,7 +16,7 @@ check_system() {
     elif [[ "${ID}" == "archlinux"  ]] || [[ "${ID}" == "manjaro"  ]] || [[ "${ID}" == "endeavouros"  ]]; then
         echo -e "${OK} ${GreenBG} 当前系统为 $ID"
 		sudo pacman -Sy
-        INS="pacman -S"
+        INS="pacman -S --noconfirm"
 		sudo $INS --noconfirm base-devel
     else
         echo -e "${Error} ${RedBG} 当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内，安装中断 ${Font}"
@@ -34,7 +34,7 @@ function install_dwm() {
 	if ! [ -f bg.jpg ]; then
 		wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
 	fi
-    yes | sudo $INS --noconfirm recordmydesktop git firefox feh compton xautolock scrot
+    yes | sudo $INS recordmydesktop git firefox feh compton xautolock scrot
     TUSER="$USER"
     git clone https://git.suckless.org/st
     cp st.diff st/
