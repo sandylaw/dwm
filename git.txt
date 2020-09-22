@@ -1,0 +1,5 @@
+git clone https://github.com/juliusHuelsmann/st.git
+git clone https://git.suckless.org/dwm/
+git clone https://git.suckless.org/dmenu/
+git clone https://git.suckless.org/slock
+git clone git://git.suckless.org/slstatus
