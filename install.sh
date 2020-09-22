@@ -2,7 +2,7 @@
 #v1.0 by sandylaw <freelxs@gmail.com> 2020-09-20
 # shellcheck disable=SC1091
 source '/etc/os-release'
-ID=$(echo "${ID}" | tr '[:upper:]]' '[:lower:]')
+ID=$(echo "${ID}" | tr '[:upper:]' '[:lower:]')
 VERSION=$(echo "${VERSION}" | awk -F "[()]" '{print $2}')
 check_system() {
     if [[ "${ID}" == "centos" && ${VERSION_ID} -ge 7 ]]; then
@@ -15,12 +15,12 @@ check_system() {
         echo -e "当前系统为 Debian系"
         sudo apt update
         INS="apt install"
-        sudo "$INS" libx11-dev libxrandr-dev libxft-dev libxinerama-dev libjpeg-dev firefox-esr -y
+        sudo $INS libx11-dev libxrandr-dev libxft-dev libxinerama-dev libjpeg-dev firefox-esr -y
     elif [[ "${ID}" == "archlinux"  ]] || [[ "${ID}" == "manjaro"  ]] || [[ "${ID}" == "endeavouros"  ]]; then
         echo -e "当前系统为 $ID"
         sudo pacman -Sy
         INS="pacman -S --noconfirm"
-        sudo "$INS" --noconfirm base-devel firefox
+        sudo $INS --noconfirm base-devel firefox
     else
         echo -e "当前系统为 ${ID} ${VERSION_ID} 不在支持的系统列表内，安装中断"
         exit 1
@@ -29,19 +29,20 @@ check_system() {
 
 function install_dwm() {
     rm -rf st dmenu dwm slstatus farbfeld sent slock || true
-    yes | sudo "$INS" recordmydesktop git feh compton xautolock scrot pcmanfm || exit
-    git clone git@github.com:sandylaw/dwm.git .
-    # if ! [ -f dwm.diff ]; then
-    # 	wget -N --no-check-certificate -q -O dwm.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/dwm.diff"
-    # fi
-    # if ! [ -f st.diff ]; then
-    # 	wget -N --no-check-certificate -q -O st.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/st.diff"
-    # fi
-    # if ! [ -f bg.jpg ]; then
-    # 	wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
-    # fi
+    yes | sudo $INS recordmydesktop git feh compton xautolock scrot pcmanfm || exit
+    # git clone git@github.com:sandylaw/dwm.git
+    # cd dwm || exit
+    if ! [ -f dwm.diff ]; then
+        wget -N --no-check-certificate -q -O dwm.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/dwm.diff"
+    fi
+    if ! [ -f st.diff ]; then
+        wget -N --no-check-certificate -q -O st.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/st.diff"
+    fi
+    if ! [ -f bg.jpg ]; then
+        wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
+    fi
     TUSER="$USER"
-    # git clone https://github.com/juliusHuelsmann/st.git
+    git clone https://github.com/juliusHuelsmann/st.git
     cd st || exit
     git checkout master
     cp ../st.diff .
@@ -49,17 +50,17 @@ function install_dwm() {
     # Optional: Use my xresources
     xrdb -merge .Xresources
     cd ..
-    # git clone https://git.suckless.org/dwm/
+    git clone https://git.suckless.org/dwm/
     cp dwm.diff dwm/
     cd dwm || exit
     sed -ri "s/_USERNAME/$TUSER/g" dwm.diff
     patch -p1 < dwm.diff
     cd ..
-    # git clone https://git.suckless.org/dmenu/
-    # git clone https://git.suckless.org/slock
+    git clone https://git.suckless.org/dmenu/
+    git clone https://git.suckless.org/slock
     wget -O - https://dl.suckless.org/farbfeld/farbfeld-4.tar.gz | tar -xz
     mv farbfeld* farbfeld
-    # git clone git://git.suckless.org/slstatus
+    git clone git://git.suckless.org/slstatus
     mkdir -p sent/
     pushd sent/ > /dev/null || exit
     wget -O - https://dl.suckless.org/tools/sent-1.tar.gz | tar -xz
