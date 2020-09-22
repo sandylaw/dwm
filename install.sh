@@ -42,9 +42,11 @@ function install_dwm() {
         wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
     fi
     TUSER="$USER"
-    git clone https://github.com/juliusHuelsmann/st.git
+    #git clone https://github.com/juliusHuelsmann/st.git
+    wget -O - https://dl.suckless.org/st/st-0.8.4.tar.gz | tar -xz
+    mv st-0.8.4 st
     cd st || exit
-    git checkout master
+    #git checkout master
     cp ../st.diff .
     patch -p1 < st.diff
     # Optional: Use my xresources
@@ -65,7 +67,7 @@ function install_dwm() {
     pushd sent/ > /dev/null || exit
     wget -O - https://dl.suckless.org/tools/sent-1.tar.gz | tar -xz
     popd > /dev/null || exit
-    mkdir -p /home/"$TUSER"/screenshots > /dev/null
+    mkdir -p /home/"$TUSER"/screenshots 2>/dev/null
     tree -d .
     DWM=(st dmenu dwm slstatus farbfeld sent slock)
     for x in ${DWM[*]}; do

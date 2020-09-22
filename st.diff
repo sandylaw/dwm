@@ -1,6 +1,6 @@
-diff -up st/config.def.h newst/config.def.h
---- st/config.def.h	2020-09-21 22:47:05.603736688 +0800
-+++ newst/config.def.h	2020-09-21 22:44:34.912367000 +0800
+diff --color -up st/config.def.h nst/config.def.h
+--- st/config.def.h	2020-06-19 17:29:45.000000000 +0800
++++ nst/config.def.h	2020-09-22 13:52:20.163231032 +0800
 @@ -5,7 +5,7 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
@@ -8,5 +8,84 @@ diff -up st/config.def.h newst/config.def.h
 -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 +static char *font = "Noto Sans Mono CJK SC:pixelsize=24:antialias=true:autohint=true";
  static int borderpx = 2;
-
+ 
  /*
+@@ -96,30 +96,31 @@ unsigned int tabspaces = 8;
+ /* Terminal colors (16 first used in escape sequence) */
+ static const char *colorname[] = {
+ 	/* 8 normal colors */
+-	"black",
+-	"red3",
+-	"green3",
+-	"yellow3",
+-	"blue2",
+-	"magenta3",
+-	"cyan3",
+-	"gray90",
++    "#282a36",
++	"#f07178",
++	"#c3e88d",
++	"#ffcb6b",
++	"#82aaff",
++	"#c792ea",
++	"#89ddff",
++	"#d0d0d0",
+ 
+ 	/* 8 bright colors */
+-	"gray50",
+-	"red",
+-	"green",
+-	"yellow",
+-	"#5c5cff",
+-	"magenta",
+-	"cyan",
+-	"white",
++	"#434758",
++	"#ff8b92",
++	"#ddffa7",
++	"#ffe585",
++	"#9cc4ff",
++	"#e1acff",
++	"#a3f7ff",
++	"#ffffff",
+ 
+ 	[255] = 0,
+ 
+ 	/* more colors can be added after 255 to use with DefaultXX */
+-	"#cccccc",
+-	"#555555",
++	"#282a36",
++	"#bbc5ff",
++	"#d7d7d7",
+ };
+ 
+ 
+@@ -127,10 +128,10 @@ static const char *colorname[] = {
+  * Default colors (colorname index)
+  * foreground, background, cursor, reverse cursor
+  */
+-unsigned int defaultfg = 7;
+-unsigned int defaultbg = 0;
+-static unsigned int defaultcs = 256;
+-static unsigned int defaultrcs = 257;
++unsigned int defaultbg = 256;
++unsigned int defaultfg = 257;
++static unsigned int defaultcs = 258;
++static unsigned int defaultrcs = 258;
+ 
+ /*
+  * Default shape of cursor
+@@ -191,9 +192,9 @@ static Shortcut shortcuts[] = {
+ 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
+ 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
+ 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
+-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
++	{ TERMMOD,              XK_K,           zoom,           {.f = +1} },
++	{ TERMMOD,              XK_J,           zoom,           {.f = -1} },
++	{ TERMMOD,              XK_U,           zoomreset,      {.f =  0} },
+ 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
+ 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
+ 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+只在 nst 存在：st.diff

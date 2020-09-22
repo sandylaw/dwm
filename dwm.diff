@@ -33,9 +33,9 @@ diff -up dwm/config.def.h newdwm/config.def.h
  static Key keys[] = {
  	/* modifier                     key        function        argument */
 -	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-+	{ 0,                            PrintScreenDWM, spawn,     SHCMD("scrot %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/sandy/Pictures/screenshots/'") },
-+	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("scrot --focused %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/sandy/Pictures/screenshots/'") },
-+	{ ControlMask,                  XK_Print,  spawn,          SHCMD("sleep 1s;scrot --select %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/sandy/Pictures/screenshots/'") },
++	{ 0,                            PrintScreenDWM, spawn,     SHCMD("scrot %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/_USERNAME/Pictures/screenshots/'") },
++	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("scrot --focused %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/_USERNAME/Pictures/screenshots/'") },
++	{ ControlMask,                  XK_Print,  spawn,          SHCMD("sleep 1s;scrot --select %Y-%m-%d-%s_$wx$h.jpg -e 'mv $f /home/_USERNAME/Pictures/screenshots/'") },
  	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 +	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filecmd } },
 +	{ MODKEY,                       XK_w,      spawn,          {.v = browsercmd } },
