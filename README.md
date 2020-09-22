@@ -36,10 +36,8 @@
 
 ## st
 
-- Alt+c into vim mode
-- Esc or i return normal mode
-- Paste: shift+insert
-- Copy: Ctrl+Shift+c
+- Pageup/pagedown: shift+pageup/pagedown or mouse
+
 
 ## Layouts
 
