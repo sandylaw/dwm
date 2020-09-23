@@ -50,7 +50,7 @@ function install_dwm() {
     patch -p1 < st.diff
     cd ..
     #git clone https://git.suckless.org/dwm/
-    tar -xz dwm.tar.gz || exit
+    tar -xf dwm.tar.gz || exit
     cp dwm.diff dwm/
     cd dwm || exit
     sed -ri "s/_USERNAME/$TUSER/g" dwm.diff
