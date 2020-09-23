@@ -30,8 +30,6 @@ check_system() {
 function install_dwm() {
     rm -rf st dmenu dwm slstatus farbfeld sent slock || true
     yes | sudo $INS recordmydesktop git feh compton xautolock scrot pcmanfm || exit
-    # git clone git@github.com:sandylaw/dwm.git
-    # cd dwm || exit
     if ! [ -f dwm.diff ]; then
         wget -N --no-check-certificate -q -O dwm.diff "https://raw.githubusercontent.com/sandylaw/dwm/master/dwm.diff"
     fi
@@ -41,18 +39,18 @@ function install_dwm() {
     if ! [ -f bg.jpg ]; then
         wget -N --no-check-certificate -q -O bg.jpg "https://raw.githubusercontent.com/sandylaw/dwm/master/bg.jpg"
     fi
+    if ! [ -f dwm.tar.gz ]; then
+        wget -N --no-check-certificate -q -O dwm.tar.gz "https://raw.githubusercontent.com/sandylaw/dwm/master/dwm.tar.gz"
+    fi
     TUSER="$USER"
-    #git clone https://github.com/juliusHuelsmann/st.git
     wget -O - https://dl.suckless.org/st/st-0.8.4.tar.gz | tar -xz
     mv st-0.8.4 st
     cd st || exit
-    #git checkout master
     cp ../st.diff .
     patch -p1 < st.diff
-    # Optional: Use my xresources
-    xrdb -merge .Xresources
     cd ..
-    git clone https://git.suckless.org/dwm/
+    #git clone https://git.suckless.org/dwm/
+    tar -xz dwm.tar.gz || exit
     cp dwm.diff dwm/
     cd dwm || exit
     sed -ri "s/_USERNAME/$TUSER/g" dwm.diff
