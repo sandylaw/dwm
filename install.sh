@@ -16,7 +16,7 @@ check_system() {
         sudo apt update
         INS="apt install"
         sudo $INS libx11-dev libxrandr-dev libxft-dev libxinerama-dev libjpeg-dev firefox-esr -y
-    elif [[ "${ID}" == "archlinux"  ]] || [[ "${ID}" == "manjaro"  ]] || [[ "${ID}" == "endeavouros"  ]]; then
+    elif [[ "${ID}" == "arch"  ]] || [[ "${ID}" == "archlinux"  ]] || [[ "${ID}" == "manjaro"  ]] || [[ "${ID}" == "endeavouros"  ]]; then
         echo -e "当前系统为 $ID"
         sudo pacman -Sy
         INS="pacman -S --noconfirm"
